@@ -14,4 +14,8 @@ class AppAssets {
   static const String mostRecentlyImage =
       "assets/images/most_recently_image.png";
   static const String vector = "assets/images/vector.png";
+  static const String detailsBg = "assets/images/details_bg.png";
+  static const String detailsLeftBg = "assets/images/details_left_bg.png";
+  static const String detailsRightBg = "assets/images/details_right_bg.png";
+  static const String mosqueBg = "assets/images/mosque_bg.png";
 }

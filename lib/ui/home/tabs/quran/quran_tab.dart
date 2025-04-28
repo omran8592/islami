@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:islami/ui/home/tabs/quran/details/sura_details_screen.dart';
 import 'package:islami/ui/home/tabs/quran/quran_resources.dart';
 import 'package:islami/ui/home/tabs/quran/sura_list_widget.dart';
 import 'package:islami/utils/app_assets.dart';
@@ -40,7 +40,7 @@ class QuranTab extends StatelessWidget {
                 color: AppColors.primaryColor,
               ),
               hintText: "Sura Name",
-              helperStyle: AppStyles.bold16White,
+              hintStyle: AppStyles.bold16White,
             ),
           ),
           SizedBox(height: height * 0.02),
@@ -94,7 +94,13 @@ class QuranTab extends StatelessWidget {
             child: ListView.separated(
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) {
-                return SuraListWidget(index: index);
+                return InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                          SuraDetailsScreen.routeName,
+                          arguments: index);
+                    }
+                    , child: SuraListWidget(index: index));
               },
               separatorBuilder: (context, index) {
                 return Divider(
