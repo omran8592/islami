@@ -13,12 +13,9 @@ class RadioTab extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                Image.asset('assets/images/group_bg6.png'),
                 Image.asset('assets/images/group_bg5.png'),
                 Image.asset('assets/images/group_bg7.png'),
                 Image.asset('assets/images/group_bg8.png'),
-                Image.asset('assets/images/group_bg6.png'),
-                Image.asset('assets/images/group_bg2.png'),
                 Image.asset('assets/images/group_bg.png'),
                 Image.asset('assets/images/group_bg3.png'),
                 Image.asset('assets/images/group_bg4.png'),
