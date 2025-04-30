@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.4
   carousel_slider: ^5.0.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +68,7 @@ flutter:
   assets:
     - assets/images/
     - assets/files/
+    - assets/files/hadeeth/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

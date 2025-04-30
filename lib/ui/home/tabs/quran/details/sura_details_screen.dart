@@ -21,30 +21,45 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
   List<String> verses = [];
   late MostRecentListProvider provider;
   int? selectedVerseIndex;
+  late int index;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // لازم نأخر شوية علشان نضمن إن context جهز
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      index = ModalRoute.of(context)?.settings.arguments as int;
+      loadSuraFile(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    int index = ModalRoute.of(context)?.settings.arguments as int;
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    provider = Provider.of<MostRecentListProvider>(context);
 
-    if (verses.isEmpty) {
-      loadSuraFile(index);
-    }
+    provider = Provider.of<MostRecentListProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          QuranResources.englishQuranList[index],
+          isLoading ? "Loading..." : QuranResources.englishQuranList[index],
           style: AppStyles.bold20Primary,
         ),
       ),
       body: Container(
         color: AppColors.blakeBgColor,
         padding: EdgeInsets.symmetric(horizontal: width * 0.04),
-        child: Column(
-          children: [
+        child:
+            isLoading
+                ? Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primaryColor,
+                  ),
+                )
+                : Column(
+                  children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,17 +72,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               ],
             ),
             Expanded(
-              child:
-                  verses.isEmpty
-                      ? Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.primaryColor,
-                        ),
-                      )
-                      : ListView.separated(
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: height * 0.01);
-                        },
+                      child: ListView.separated(
+                        separatorBuilder:
+                            (context, index) => SizedBox(height: height * 0.01),
                         itemBuilder: (context, idx) {
                           return GestureDetector(
                             onTap: () {
@@ -84,7 +91,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                         },
                         itemCount: verses.length,
                       ),
-            ),
+                    ),
             Image.asset(AppAssets.mosqueBg),
           ],
         ),
@@ -94,17 +101,24 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     provider.refreshMostRecentList();
   }
 
   void loadSuraFile(int index) async {
-    String fileContent = await rootBundle.loadString(
-      "assets/files/${index + 1}.txt",
-    );
-    List<String> suraLines = fileContent.split("\n");
-    verses = suraLines;
-    Future.delayed(const Duration(seconds: 1), () => setState(() {}));
+    try {
+      String fileContent = await rootBundle.loadString(
+        "assets/files/${index + 1}.txt",
+      );
+      setState(() {
+        verses = fileContent.split("\n");
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        verses = ["Error loading sura."];
+        isLoading = false;
+      });
+    }
   }
 }
