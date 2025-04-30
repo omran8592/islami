@@ -29,4 +29,15 @@ class AppAssets {
   static const String frame3 = "assets/images/frame3.png";
   static const String frame4 = "assets/images/frame4.png";
   static const String frame5 = "assets/images/frame5.png";
+  static const String group_Bg = "assets/images/group_bg.png";
+  static const String group_Bg2 = "assets/images/group_bg2.png";
+  static const String group_Bg3 = "assets/images/group_bg3.png";
+  static const String group_Bg4 = "assets/images/group_bg4.png";
+  static const String group_Bg5 = "assets/images/group_bg5.png";
+  static const String group_Bg6 = "assets/images/group_bg6.png";
+  static const String group_Bg7 = "assets/images/group_bg7.png";
+  static const String group_Bg8 = "assets/images/group_bg8.png";
+  static const String group_Bg10 = "assets/images/group_bg10.png";
+  static const String group_Bg11 = "assets/images/group_bg11.png";
+  static const String group_Bg12 = "assets/images/group_bg12.png";
 }
